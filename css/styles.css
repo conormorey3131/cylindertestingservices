@@ -726,3 +726,76 @@ legend { font-weight: 700; font-size: 0.9rem; padding: 0 0.4em; }
 address { font-style: normal; }
 .map-embed { border: 1px solid var(--grey-200); border-radius: var(--radius); overflow: hidden; }
 .map-embed img { width: 100%; }
+
+/* ==========================================================================
+   Compliance / credentials (ISO 18119, TPED, ADR, fire suppression)
+   ========================================================================== */
+.cred-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+.cred-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  border: 1.5px solid rgba(255, 255, 255, 0.55);
+  color: var(--white);
+  border-radius: 999px;
+  padding: 0.35em 0.9em;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.cred-badge::before {
+  content: "";
+  width: 0.55em; height: 0.55em;
+  border-radius: 50%;
+  background: var(--white);
+  flex-shrink: 0;
+}
+.cred-strip--dark .cred-badge { border-color: var(--navy-800); color: var(--navy-800); }
+.cred-strip--dark .cred-badge::before { background: var(--navy-800); }
+
+.cred-band {
+  background: var(--navy-900);
+  color: var(--white);
+  padding: 3rem 0;
+}
+.cred-band h2 { color: var(--white); }
+.cred-band p { color: var(--grey-100); }
+.cred-band__lead {
+  font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--white) !important;
+  max-width: 40em;
+  margin-bottom: 2rem;
+}
+.cred-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+@media (min-width: 640px) { .cred-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 980px) { .cred-grid { grid-template-columns: repeat(4, 1fr); } }
+.cred-item {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+.cred-item__code {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--white);
+  margin-bottom: 0.25em;
+  line-height: 1.1;
+}
+.cred-item h3 { color: var(--white); font-size: 1.05rem; margin-bottom: 0.4em; }
+.cred-item p { font-size: 0.95rem; margin: 0; }
+
+/* Header CTA: .primary-nav > ul > li > a outranks .btn--primary, so restore the button colours explicitly */
+.primary-nav > ul > li > a.nav-cta { color: var(--white); }
+.primary-nav > ul > li > a.nav-cta:hover { color: var(--navy-800); }
