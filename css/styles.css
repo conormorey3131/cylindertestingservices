@@ -799,3 +799,10 @@ address { font-style: normal; }
 /* Header CTA: .primary-nav > ul > li > a outranks .btn--primary, so restore the button colours explicitly */
 .primary-nav > ul > li > a.nav-cta { color: var(--white); }
 .primary-nav > ul > li > a.nav-cta:hover { color: var(--navy-800); }
+
+/* Real photos (replace .img-placeholder figures) */
+.img-photo { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--grey-100); }
+.img-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.img-photo--tall { aspect-ratio: 4 / 3; min-height: 320px; }
+.img-photo--wide { aspect-ratio: 16 / 9; min-height: 260px; }
+@media (min-width: 800px) { .img-photo--tall { height: 100%; } }
