@@ -208,13 +208,13 @@
             form.hidden = true;
             showMessage("success", "Thanks — your request has been sent. We'll be in touch within one working day.");
           } else {
-            showMessage("error", "Something went wrong sending your request. Please call us on (063) 20700 instead.");
+            showMessage("error", "Something went wrong sending your request. Please call us on (063) 69 698 instead.");
           }
         })
         .catch(function () {
           submitBtn.disabled = false;
           submitBtn.textContent = "Request a quote";
-          showMessage("error", "Something went wrong sending your request. Please call us on (063) 20700 instead.");
+          showMessage("error", "Something went wrong sending your request. Please call us on (063) 69 698 instead.");
         });
     });
   }
