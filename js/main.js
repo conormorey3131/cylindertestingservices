@@ -9,7 +9,7 @@
      Config placeholders — replace before launch
      --------------------------------------------------------------------- */
   var CONFIG = {
-    GA4_ID: "G-XXXXXXXXXX", // TODO: replace with live GA4 measurement ID
+    GA4_ID: "G-RY5RWEZWBM",
     FORM_ENDPOINT: "https://api.web3forms.com/submit", // Web3Forms endpoint
     FORM_ACCESS_KEY: "YOUR_WEB3FORMS_ACCESS_KEY" // TODO: replace with client's Web3Forms access key
   };
