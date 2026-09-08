@@ -594,6 +594,12 @@ legend { font-weight: 700; font-size: 0.9rem; padding: 0 0.4em; }
 .radio-row { display: flex; gap: 1.25rem; margin-top: 0.35rem; }
 .radio-row label { display: flex; align-items: center; gap: 0.4em; font-weight: 500; }
 .radio-row input { width: auto; }
+.check-grid { display: grid; grid-template-columns: 1fr; gap: 0.5rem 1.25rem; margin-top: 0.35rem; }
+@media (min-width: 640px) { .check-grid { grid-template-columns: 1fr 1fr; } }
+.check-grid label, .consent-row { display: flex; align-items: flex-start; gap: 0.5em; font-weight: 500; }
+.check-grid input, .consent-row input { width: auto; margin-top: 0.3em; flex-shrink: 0; }
+.form-field .consent-row { font-weight: 400; font-size: 0.9rem; }
+fieldset.invalid { border-color: var(--error-text); }
 
 /* honeypot — hidden from sighted users and keyboard tab order, left visible to bots */
 .hp-field {
