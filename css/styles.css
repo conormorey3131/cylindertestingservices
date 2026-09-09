@@ -173,6 +173,7 @@ img { max-width: 100%; display: block; }
 }
 .header-inner {
   display: flex;
+  flex-wrap: wrap; /* lets the opened mobile menu drop onto its own full-width row */
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -236,7 +237,11 @@ img { max-width: 100%; display: block; }
   flex-basis: 100%;
   display: none;
 }
-.primary-nav.is-open { display: block; }
+.primary-nav.is-open {
+  display: block;
+  max-height: calc(100vh - 80px); /* keep long menus scrollable on short phone screens */
+  overflow-y: auto;
+}
 .primary-nav > ul {
   list-style: none;
   margin: 0.75rem 0 0;
@@ -281,7 +286,8 @@ img { max-width: 100%; display: block; }
   .header-phone { display: inline-flex; }
   .nav-toggle { display: none; }
   .logo__img { height: 40px; }
-  .primary-nav { display: block; order: 2; flex-basis: auto; width: auto; }
+  .header-inner { flex-wrap: nowrap; }
+  .primary-nav { display: block; order: 2; flex-basis: auto; width: auto; max-height: none; overflow: visible; }
   .primary-nav > ul {
     display: flex;
     align-items: center;
@@ -500,6 +506,27 @@ th, td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(-
 thead th { background: var(--navy-800); color: var(--white); }
 tbody tr:nth-child(even) { background: var(--grey-50); }
 tbody tr:last-child td { border-bottom: none; }
+tbody th[scope="row"] { font-weight: 700; color: var(--navy-800); }
+
+/* Comparison table: on phones, stack each row into a labelled block instead of scrolling sideways */
+@media (max-width: 639px) {
+  .compare-table { min-width: 0; }
+  .compare-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  .compare-table tr { display: block; padding: 0.9rem 1rem; border-bottom: 1px solid var(--grey-200); }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table th[scope="row"] { display: block; padding: 0 0 0.5rem; border: none; font-size: 1.05rem; }
+  .compare-table td { display: block; padding: 0.35rem 0; border: none; font-size: 0.95rem; }
+  .compare-table td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--grey-600);
+    margin-bottom: 0.1em;
+  }
+}
 
 /* Callout / note */
 .callout {
@@ -620,7 +647,7 @@ fieldset.invalid { border-color: var(--error-text); }
 .form-msg.is-visible { display: block; }
 .form-msg--success { background: var(--success-bg); color: var(--success-text); }
 .form-msg--error { background: var(--error-bg); color: var(--error-text); }
-.field-error { color: var(--error-text); font-size: 0.8rem; min-height: 1.1em; }
+.field-error { color: var(--error-text); font-size: 0.8rem; min-height: 1.1em; margin: 0; }
 .invalid { border-color: var(--error-text); }
 
 /* ==========================================================================
@@ -714,10 +741,12 @@ fieldset.invalid { border-color: var(--error-text); }
 .mt-0 { margin-top: 0; }
 .two-col {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 2rem;
   align-items: start;
 }
+.two-col > * { min-width: 0; }
+img, iframe, video { max-width: 100%; }
 @media (min-width: 800px) { .two-col { grid-template-columns: 1.1fr 0.9fr; } }
 .list-check { list-style: none; padding-left: 0; }
 .list-check li { position: relative; padding-left: 1.6em; margin-bottom: 0.6em; }
@@ -807,8 +836,13 @@ address { font-style: normal; }
 .primary-nav > ul > li > a.nav-cta:hover { color: var(--navy-800); }
 
 /* Real photos (replace .img-placeholder figures) */
-.img-photo { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--grey-100); }
+.img-photo { margin: 0; border-radius: var(--radius); overflow: hidden; background: var(--grey-100); width: 100%; max-width: 100%; }
 .img-photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.img-photo--tall { aspect-ratio: 4 / 3; min-height: 320px; }
-.img-photo--wide { aspect-ratio: 16 / 9; min-height: 260px; }
-@media (min-width: 800px) { .img-photo--tall { height: 100%; } }
+/* Height comes from the aspect ratio; the min-heights below apply only once the
+   photo sits beside text, otherwise they force a width wider than a phone screen. */
+.img-photo--tall { aspect-ratio: 4 / 3; }
+.img-photo--wide { aspect-ratio: 16 / 9; }
+@media (min-width: 800px) {
+  .img-photo--tall { height: 100%; min-height: 320px; }
+  .img-photo--wide { min-height: 260px; }
+}
